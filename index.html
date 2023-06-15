@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        #container {
+            height: 20vh;
+            width: 20%;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 20px 20px 0px 0px;
+        }
+
+        #btns {
+            height: 20vh;
+            width: 100%;
+            background-color: rgb(88, 88, 126);
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        button {
+            height: 4vh;
+            width: 30%;
+            background-color: rgb(0, 0, 0);
+            color: white;
+
+        }
+
+        p {
+            font-size: 50px;
+            font-weight: bold;
+            color: whitesmoke;
+            display: flex;
+            letter-spacing: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <p id="time"><span id="minute">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+        <div id="btns">
+            <button id="stop">Stop</button>
+            <button id="start">Start</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+
+    
+
+    <script>
+        var seconds = 00
+        var tens = 00
+        var min  = 00
+        var appendsec = document.getElementById('seconds')
+        var appendten = document.getElementById('tens')
+        var appendmin = document.getElementById('minute')
+        var stop = document.getElementById('stop')
+        var start = document.getElementById('start')
+        var reset = document.getElementById('reset')
+        var interval;
+
+        function startTimer() {
+            tens++
+
+            if (tens < 9) {
+                appendten.innerHTML = "0" + tens
+            }
+            if (tens > 9) {
+                appendten.innerHTML = tens
+            }
+            if (tens > 99) {
+                seconds++
+                appendsec.innerHTML = "0" + seconds
+                tens = 0
+                appendten.innerHTML = "0" + tens
+            }
+            if (seconds > 9) {
+                appendsec.innerHTML = seconds
+            }
+            if  (seconds > 59) {
+                min++
+                appendmin.innerHTML = "0" + min
+                seconds = 0
+                appendsec.innerHTML = "0" + seconds
+                tens = 0
+                appendten.innerHTML = "0" + tens
+            }
+            if  (min > 9) {
+                appendmin.innerHTML = min
+            }
+        }
+        start.addEventListener("click", function () {
+            interval = setInterval(startTimer)
+        })
+        stop.addEventListener("click", function () {
+            clearInterval(interval)
+        })
+        reset.addEventListener("click", function () {
+            clearInterval(interval)
+            tens = "00"
+            seconds = "00"
+            appendsec.innerHTML = seconds
+            appendten.innerHTML = tens
+        })
+    </script>
+</body>
+
+</html>
